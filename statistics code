@@ -1,0 +1,144 @@
+Cell Phone Survey Dataset Statistics by Nageshwar Kumar Singh
+
+
+
+
+Q. Download the Cell Phone Survey Dataset and perform the below
+mentioned operations on the dataset:-
+
+import pandas as pd
+import statistics
+
+
+# Read the dataset into a pandas DataFrame
+df = pd.read_csv("Cell Phone Survey.csv")
+
+● Checking datatypes of each column in the dataset.
+
+print(df.dtypes)
+Output
+Gender                  object
+Carrier                 object
+Type                    object
+Usage                   object
+Signal strength          int64
+Value for the Dollar     int64
+Customer Service         int64
+dtype: object
+
+● Find Mean of Signal strength column using Pandas and
+Statistics library.
+
+signal_strength_mean = df["Signal strength"].mean()
+signal_strength_mean_2 = statistics.mean(df["Signal strength"])
+print(f"Mean of Signal strength column using pandas: {signal_strength_mean}")
+print(f"Mean of Signal strength column using statistics library: {signal_strength_mean_2}")
+
+
+Output;
+Mean of Signal strength column using pandas: 3.3076923076923075
+Mean of Signal strength column using statistics library: 3.3076923076923075
+
+● Find the Median of Customer Service column using Pandas and
+Statistics library.
+
+customer_service_median = df["Customer Service"].median()
+customer_service_median_2 = statistics.median(df["Customer Service"])
+print(f"Median of Customer Service column using pandas: {customer_service_median}")
+print(f"Median of Customer Service column using statistics library: {customer_service_median_2}")
+
+
+Output;
+Median of Customer Service column using pandas: 3.0
+Median of Customer Service column using statistics library: 3.0
+
+● Find Mode of Signal strength column using Pandas and
+Statistics library.
+
+signal_strength_mode = df["Signal strength"].mode()[0]
+signal_strength_mode_2 = statistics.mode(df["Signal strength"])
+print(f"Mode of Signal strength column using pandas: {signal_strength_mode}")
+print(f"Mode of Signal strength column using statistics library: {signal_strength_mode_2}")
+
+
+Output;
+Mode of Signal strength column using pandas: 3
+Mode of Signal strength column using statistics library: 3
+
+● Find Standard deviation of Customer Service column using
+Pandas and Statistics library.
+customer_service_std = df["Customer Service"].std()
+customer_service_std_2 = statistics.stdev(df["Customer Service"])
+print(f"Standard deviation of Customer Service column using pandas: {customer_service_std}")
+print(f"Standard deviation of Customer Service column using statistics library: {customer_service_std_2}")
+
+
+Output
+Standard deviation of Customer Service column using pandas: 0.9623375261979595
+Standard deviation of Customer Service column using statistics library: 0.9623375261979595
+
+● Find Variance of Customer Service column using Pandas and
+Statistics library.
+
+customer_service_var = df["Customer Service"].var()
+customer_service_var_2 = statistics.variance(df["Customer Service"])
+print(f"Variance of Customer Service column using pandas: {customer_service_var}")
+print(f"Variance of Customer Service column using statistics library: {customer_service_var_2}")
+
+
+Output
+Variance of Customer Service column using pandas: 0.9260935143288084
+Variance of Customer Service column using statistics library: 0.9260935143288084
+
+● Calculate Percentiles of Value for the Dollar column using
+Numpy.
+value_percentiles = df["Value for the Dollar"].quantile([0.25, 0.5, 0.75])
+print("Value for the Dollar column percentiles:")
+print(value_percentiles)
+
+Output
+Value for the Dollar column percentiles:
+0.25    3.0
+0.50    3.0
+0.75    4.0
+Name: Value for the Dollar, dtype: float64
+
+
+● Calculate Range of Value for the Dollar column using Pandas.
+
+value_for_dollar_range = df['Value for the Dollar'].max() - df['Value for the Dollar'].min()
+print(f"Range of Value for the Dollar column: {value_for_dollar_range}")
+
+
+Output
+Range of Value for the Dollar column: 4
+
+
+● Calculate IQR of Value for the Dollar column using Pandas.
+
+value_for_dollar_iqr = df['Value for the Dollar'].quantile(0.75) - df['Value for the Dollar'].quantile(0.25)
+print(f"IQR of Value for the Dollar column: {value_for_dollar_iqr}")
+
+
+Output
+IQR of Value for the Dollar column: 1.0
+
+● Hypothesis Testing - Using the data in the Cell Phone Survey
+dataset, apply ANOVA to determine if the mean response for
+Value for dollar is the same for different types of cell phones
+
+grouped_data = df.groupby(['Type'])['Value for the Dollar'].apply(list)
+f_statistic, p_value = stats.f_oneway(*grouped_data.values)
+
+
+if p_value < 0.05:
+    print(f"The mean response for Value for the Dollar is significantly different for different types of cell phones. (p-value = {p_value})")
+else:
+    print(f"The mean response for Value for the Dollar is not significantly different for different types of cell phones. (p-value = {p_value})")
+Output;
+The mean response for Value for the Dollar is not significantly different for different types of cell phones. (p-value = 0.053454200712805613)
+
+
+
+
+
